@@ -1,0 +1,14 @@
+2. Version 2
+. DLL command DLL rounded, integer type, "gdi32", "createroundrectrgn". When not in use, the deleteobject function must be used to delete the area
+X1. Parameter nleftrect, integer type, left
+. parameter ntoprect, integer type, Y1 -- X and Y coordinates of the upper left corner of the rectangle
+X2. Parameter nrightrect, integer type, right
+. parameter nbottomrect, integer type, Y2 -- X and Y coordinates of the lower right corner of the rectangle
+. parameter nwidthellipse, integer type, width of rounded ellipse. It ranges from 0 (no rounded corners) to rectangular width (full circle)
+. parameter nheightellipse, integer type, height of rounded ellipse. It ranges from 0 (no rounded corners) to rectangular height (full circle)
+. DLL command DLL delete object, integer type, "gdi32", "deleteobject", return value: success, return non-zero value; If the specified handle is invalid or it has been selected into the device context, the return value is zero.
+. parameter hobject, integer type, handle of logical pen, brush, font, bitmap, area or palette
+. DLL command DLL sets the window area, integer type, "user32", "SetWindowRgn"
+. parameter hWnd, integer type, will be set to the handle of a window in the window area.
+. parameter hrgn, integer type, handle to the window area. Function sets the window area of the window to this area.
+. parameter bredraw, logic type, describes whether the system redraws the window after setting the window area. If bredraw is real, the system does so; Besides, it doesn't.
