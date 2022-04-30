@@ -1,1 +1,1559 @@
+.version 2
+.support library edroptarget
+.support library iext3
+.support library spec
+.support library iext
+.support library eAPI
+.support library internet
+.support library EThread
 
+.assembly window assembly_startup window, , ,
+
+.Subroutine __Startup window_ created, , ,
+
+comet set window shadow (get window handle(), )
+Group Box 1. Left = 76
+GroupBox1.TopEdge = 195
+Drag and drop object 1. Register drag and drop control (get window handle())
+
+
+
+
+.subroutine_clock1_period event
+.local variable result, text
+.local variable command, text
+
+command = "adb shell getprop ro.product.model"
+result = system_get DOS execution result (command)
+
+.if (result = "adb.exe: no devices/emulators found" + #newline)
+    Transparent Label 1. Title = "Device Not Connected"
+    Transparent Label 2. Title = "No connection to your device found, please make sure to enable ADB debugging"
+    Group Box 1. Left = 76
+    Picture frame 38. Picture = #picture1
+    Picture Frame 39. Background Color = #Silver White
+
+    Picture frame 42. Picture = #picture4
+    Picture Box 43. Background Color = Picture Box 44. Background Color
+    Picture frame 40. Picture = #picture4
+    Picture Box 41. Background Color = Picture Box 44. Background Color
+
+
+    GroupBox1.TopEdge = 195
+
+.otherwise
+    transparent label 1. title = result
+    Group Box 1. Left = 2000
+    GroupBox1.TopEdge = 195
+
+    Transparent label 2. Title = "Please keep the watch open ADB debugging, close other programs to maintain stability"
+.if end
+
+
+
+.' if (result = "Mi Watch" + #newline)
+    ' Transparent Label 1. Title = "Xiaomi Watch"
+.otherwise
+
+.if end
+
+
+.subroutine_clock3_period event
+
+Subroutine 1 ()
+
+.Subroutine Subroutine 1
+.local variable result, text
+.local variable command, text
+
+
+command = "adb shell getprop ro.product.brand"
+result = system_get DOS execution result (command)
+Transparent Label 6. Title = Results
+
+
+
+command = "adb shell getprop ro.product.model"
+result = system_get DOS execution result (command)
+Transparent Label 19. Title = Results
+
+command = "adb shell getprop ro.build.version.release"
+result = system_get DOS execution result (command)
+Transparent Label 22. Title = Results
+
+command = "adb shell getprop ro.build.version.sdk"
+result = system_get DOS execution result (command)
+Transparent Label 162. Title = Results
+
+command = "adb shell getprop ro.build.version.security_patch"
+result = system_get DOS execution result (command)
+Transparent Label 164. Title = Results
+
+command = "adb shell getprop ro.sf.lcd_density"
+result = system_get DOS execution result (command)
+Transparent Label 166. Title = Results
+
+command = "adb shell getprop ro.product.locale"
+result = system_get DOS execution result (command)
+Transparent Label 168. Title = Results
+command = "adb shell getprop ro.board.platform"
+result = system_get DOS execution result (command)
+Transparent Label 172. Title = Results
+
+command = "adb shell getprop ro.build.version.incremental"
+result = system_get DOS execution result (command)
+Transparent Label 170. Title = Results
+
+
+
+command = "adb shell getprop persist.sys.timezone"
+result = system_get DOS execution result (command)
+Transparent Label 174. Title = Results
+
+
+command = "adb shell getprop ro.boot.serialno"
+result = system_get DOS execution result (command)
+Transparent Label 176. Title = Results
+
+command = "adb shell getprop ro.opengles.version"
+result = system_get DOS execution result (command)
+Transparent Label 178. Title = Results
+
+command = "adb shell getprop ro.oem.brand"
+result = system_get DOS execution result (command)
+Transparent Label 180. Title = Results
+
+command = "adb shell getprop ro.hardware"
+result = system_get DOS execution result (command)
+Transparent Label 182. Title = Results
+
+command = "adb shell getprop service.adb.tcp.port"
+result = system_get DOS execution result (command)
+Transparent Label 184. Title = Results
+
+command = "adb shell dumpsys battery"
+result = system_get DOS execution result (command)
+
+
+transparent label 186. title = to text(to value(text_extract_intermediate_text(result, "level: ", #newline, , ))) + "%"
+command = "adb shell getprop ro.product.cpu.abi"
+result = system_get DOS execution result (command)
+Transparent Label 188. Title = Results
+
+
+.subroutine _transparent label 4_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 1
+
+.subroutine _transparent label 6_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 0
+
+.subroutine _transparent label 17_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 0
+
+.subroutine _transparent label 15_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 2
+
+.subroutine _transparent label 16_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+Label 4. Title = "Connecting"
+command = "adb connect" + edit box 1. content + ":5555"
+result = system_get DOS execution result (command)
+debug output (result)
+Connection address = edit box 1. content + ":5555"
+
+.if (result = "connected to" + connection address + #newline)
+    Advanced selection folder 1. Current subfolder = 0
+.otherwise
+    Label 4. Title = "Connection failed! Please check if the IP address is correct"
+.if end
+
+
+
+
+.subroutine __startup window_ will be destroyed
+.local variable result, text
+.local variable command, text
+
+command = "adb disconnect" + connection address
+result = system_get DOS execution result (command)
+debug output (result)
+Finish ()
+
+.subroutine _transparent label 18_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+Label 7. Title = "Connecting"
+command = "adb shell getprop ro.product.model"
+result = system_get DOS execution result (command)
+debug output (result)
+
+
+.if (result ≠ "adb.exe: no devices/emulators found" + #newline)
+    Advanced selection folder 1. Current subfolder = 0
+.otherwise
+    Label 7. Title = "Connection failed! Please check for Bluetooth pairing"
+.if end
+
+
+
+
+.subroutine _charm 1_ is clicked
+
+_startwindow.destroy()
+
+
+.subroutine _transparent label 5_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 0
+
+.subroutine_clock2_period event
+.local variable result, text
+.local variable command, text
+.local variable memory amount, double precision decimal
+.local variable random, integer
+.local variable rest, integer
+.local variable other, integer
+
+
+command = "adb shell cat /proc/meminfo |findstr MemTotal"
+result = system_get DOS execution result (command)
+
+
+Amount of memory = to decimal(text_getintermediatetext(result, " ", "k", , )) ÷ 1024
+
+
+
+transparent label 45. title = to text (rounded up (amount of memory, )) + "MB"
+
+remaining = rounded (memory amount, )
+
+set random number seed ()
+random = take a random number (400, 500)
+
+
+
+Transparent Label 42. Title = To Text (Remainder - Random) + "MB"
+
+other = remaining - random
+
+Transparent Label 48. Title = To Text (Round (Other ÷ Remainder × 100, )) + "%"
+
+Transparent Label 49. Title = To Text (Remainder - Other) + "MB"
+.if (memory_amount = 0)
+    Transparent Label 42. Title = "Unavailable"
+    Transparent Label 45. Title = "Unavailable"
+    Transparent Label 48. Title = "Unavailable"
+    Transparent Label 49. Title = "Unavailable"
+.otherwise
+
+.if end
+
+
+.subroutine _transparent label 46_ ​​left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+
+command = "adb shell input keyevent 4"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+.subroutine _transparent label 41_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 51_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 4
+
+
+.subroutine _transparent label 55_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 5
+
+.subroutine _transparent label 52_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 54_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+edit box 2. content = get clipboard text ()
+
+.subroutine _transparent label 53_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+
+Command = "adb shell input text" + edit box 2. content
+result = system_get DOS execution result (command)
+
+
+.Subroutine _edit box 3_ content is changed
+
+Transparent Label 59. Title = "The DPI you entered can be modified"
+
+.if (to integer(editbox3.content) > 400)
+    Transparent Label 59. Title = "The DPI you entered is too large to modify"
+.no
+but
+
+.if end
+
+.if (to integer(editbox3.content) < 100)
+    Transparent Label 59. Title = "The DPI you entered is too small to modify"
+.otherwise
+
+.if end
+
+.if (editbox3.content="")
+    Transparent Label 59. Title = "Entering a DPI that is too large or too small may result in failure to boot, etc."
+.otherwise
+
+.if end
+
+
+
+.subroutine _transparent label 56_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 62_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+Picture frame 40. Picture = #picture1
+Picture frame 41. Background color = #silver white
+
+Picture frame 38. Picture = #picture4
+Picture box 39. Background color = Picture box 44. Background color
+
+
+Picture frame 42. Picture = #picture4
+Picture Box 43. Background Color = Picture Box 44. Background Color
+
+
+.subroutine _transparent label 61_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Picture frame 38. Picture = #picture1
+Picture Frame 39. Background Color = #Silver White
+
+Picture frame 42. Picture = #picture4
+Picture Box 43. Background Color = Picture Box 44. Background Color
+Picture frame 40. Picture = #picture4
+Picture Box 41. Background Color = Picture Box 44. Background Color
+
+Advanced selection folder 1. Current subfolder = 0
+
+.subroutine _transparent label 58_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+Command = "adb shell wm density" + edit box 3. Content
+result = system_get DOS execution result (command)
+load(success, , false)
+
+.subroutine _transparent label 57_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell wm density reset"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+.subroutine _transparent label 68_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell wm size" + edit box 4. content + "x" + edit box 5. content
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 65_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell wm size reset"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 69_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 6
+
+.subroutine _transparent label 72_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Webpage_Open the specified URL (“https://developer.android.google.cn/wear/”)
+
+
+.subroutine _transparent label 70_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 71_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = label 10. title
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 74_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = label 11. title
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 76_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Delay (2000)
+load(success, , false)
+
+.subroutine _transparent label 78_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 8
+
+.subroutine _transparent label 79_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 80_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 81_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:2"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 82_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 83_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:4"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 84_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 9
+
+.subroutine _transparent label 85_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 87_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb reboot"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+.subroutine _transparent label 86_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell reboot -p"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 89_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command="adb reboot recovery"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 88_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb reboot bootloader"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 90_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 10
+
+.subroutine _transparent label 91_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable m_szDirectory, text
+.local variable temporary text, text, , "0"
+.local variable return path, text
+
+.if (browse directory(m_szDirectory, m_szDirectory))
+    Label 14. Title = m_szDirectory
+
+
+
+
+
+
+
+    temporary text = split text (tag 14.title, "\", )
+
+    debug output (temporary text)
+    .if (findtext(temptext[getArrayMembers(temptext)], ".apk", , false) = -1)
+        load(error, , false)
+    .otherwise
+
+        Picture frame 64. Picture = #picture2
+
+        Install ()
+    .if end
+
+
+
+
+
+.otherwise
+
+.if end
+
+
+.subroutine _transparent label 92_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+
+.subroutine install
+.local variable result, text
+.local variable command, text
+
+command = "adb install -r" + label 14. title
+result = system_get DOS execution result (command)
+Picture frame 64. Picture = #picture3
+
+
+.subroutine _drag and drop object 1_ get file
+.parameter Received file path, text
+.local variable m_szDirectory, text
+.local variable temporary text, text, , "0"
+.local variable return path, text
+
+Advanced Select Clip 1. Current Subfolder = 11
+
+Label 14. Title = Received file path
+
+
+temporary text = split text (tag 14.title, "\", )
+
+debug output (temporary text)
+.if (findtext(temptext[getArrayMembers(temptext)], ".apk", , false) = -1)
+    load(error, , false)
+.otherwise
+
+    Picture frame 64. Picture = #picture2
+
+    Install ()
+.if end
+.subroutine _transparent label 94_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 11
+
+.subroutine _transparent label 98_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+Command = "adb shell dumpsys battery set level" + edit box 6. Content
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 96_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 99_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell dumpsys battery reset"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 103_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell dumpsys battery reset"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 100_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell dumpsys battery set status 2"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 101_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell dumpsys battery set status 1"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 102_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell dumpsys battery unplug"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 104_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 12
+
+.subroutine _button 1_ is clicked
+
+
+
+.subroutine _transparent label 105_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+.local variable text, text
+.local variable array, text, , "0"
+.local variable n, integer
+.local variable a, integer
+.local variable split, text, , "0"
+.local variable new result, text
+.local variable variable I, integer
+
+
+Advanced selection folder 1. Current subfolder = 13
+
+command = "adb shell pm list package"
+result = system_get DOS execution result (command)
+
+
+
+array = splittext(result, #newline, )
+.Count the first loop (get the number of array members (array), n)
+
+    a = super list box 1. insert entry (, , , , , )
+
+    super listbox 1.set title(a, 0, to text(array[n]))
+.count loop tail ()
+
+
+.subroutine _transparent label 106_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable but, text
+.local variable new result, text
+.local variable result, text
+.local variable command, text
+
+but = superlistbox1.get title(superlistbox1.currently selected item, )
+
+new result = subtext replacement (but, "package:", "", 1, 1, true)
+
+debug output (new result)
+
+command = "adb uninstall " + new result
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 107_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable but, text
+.local variable new result, text
+.local variable result, text
+.local variable command, text
+
+but = superlistbox1.get title(superlistbox1.currently selected item, )
+
+new result = subtext replacement (but, "package:", "", 1, 1, true)
+
+debug output (new result)
+
+command = "adb shell am force-stop" + new result
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 108_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable but, text
+.local variable new result, text
+.local variable result, text
+.local variable command, text
+
+but = superlistbox1.get title(superlistbox1.currently selected item, )
+
+new result = subtext replacement (but, "package:", "", 1, 1, true)
+
+debug output (new result)
+
+command = "adb shell pm disable-user" + new result
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 109_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable but, text
+.local variable new result, text
+.local variable result, text
+.local variable command, text
+
+but = superlistbox1.get title(superlistbox1.currently selected item, )
+
+new result = subtext replacement (but, "package:", "", 1, 1, true)
+
+debug output (new result)
+
+command = "adb shell pm enable" + new result
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+
+.subroutine _transparent label 110_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 111_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable but, text
+.local variable new result, text
+.local variable result, text
+.local variable command, text
+.local variable directory, text
+
+but = superlistbox1.get title(superlistbox1.currently selected item, )
+
+new result = subtext replacement (but, "package:", "", 1, 1, true)
+
+debug output (new result)
+
+command = "adb shell pm path" + new result
+result = system_get DOS execution result (command)
+
+new result = subtext replace(result, "package:", "", 1, 1, true)
+
+
+command = "adb pull" + new result
+result = system_get DOS execution result (command)
+
+debug output (result)
+
+Common Dialog 1.Type = 1
+.if true (generic dialog1.open())
+    directory = common dialog 1. filename
+    debug output (directory)
+    Move file (take run directory () + "\base.apk", directory)
+    load(success, , false)
+
+
+.if true end
+
+
+.subroutine _transparent label 112_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 3"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 113_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 4"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 114_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 26"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 115_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 24"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 116_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 25"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 117_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 164"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 118_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 91"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 119_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 5"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 120_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+type
+
+command = "adb shell input keyevent 6"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 121_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 122_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 85"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 123_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 87"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 124_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 88"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 125_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 224"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 126_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input keyevent 223"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+
+.subroutine _transparent label 127_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 14
+
+.subroutine _transparent label 128_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+load(window1, , false)
+_startwindow.visible = false
+
+.subroutine _transparent label 129_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+
+.subroutine _transparent label 133_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+Command = "adb shell screenrecord --time-limit " + edit box 7. content + "/sdcard/" + edit box 10. content + ".mp4"
+result = system_get DOS execution result (command)
+Transparent Label 133. Title = "Recording"
+command = "adb pull /sdcard/" + edit box 10. content + ".mp4"
+result = system_get DOS execution result (command)
+transparent label 133. title="recording"
+load(success, , false)
+
+
+
+.subroutine _transparent label 130_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell screencap -p /sdcard/" + edit box 12. content + ".png"
+result = system_get DOS execution result (command)
+command = "adb pull /sdcard/" + edit box 12. content + ".png"
+result = system_get DOS execution result (command)
+load(success, , false)
+
+
+.subroutine _transparent label 150_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+run (get run directory () + "\log.bat", false, )
+
+.subroutine _transparent label 156_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Open the specified URL ("https://www.include.china/")
+
+.subroutine _transparent label 157_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Transparent Label 158. Title = "Latest Version: V" + To Text (HTTP Read File ("http://www.nex2.cn/up.html")) + "M"
+
+.subroutine _transparent label 64_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Selector 2. Left = 0
+Advanced Selector 2.TopEdge = 0
+
+.subroutine _transparent label 159_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Selector 2. Left = 9999
+Advanced Selector 2. Top Edge = 9999
+
+
+.subroutine_advanced_selector1_subfolder changed
+
+
+
+.subroutine_clock4_period event
+
+start thread (&screen capture, , )
+
+
+.subroutine Screen capture
+
+System_Get DOS execution result ("adb shell screencap -p /sdcard/sc.png")
+System_Get DOS execution result (“adb pull /sdcard/sc.png c:\sc.png”)
+Picture box 103. Picture = read in file ("c:\sc.png")
+
+.subroutine _transparent label 189_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Clock 4. Clock Period = 3000
+
+.subroutine _transparent label 191_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+clock 4. clock period = 0
+
+.subroutine_clock5_period event
+
+label 16. title = "X:" + to text (take mouse horizontal position () - 1073)
+label 17. title = "Y:" + to text (take mouse vertical position () - 520)
+
+.subroutine_clock6_cycle event
+
+Label 18. title = "delay:" + to text (take random number (2000, 3000)) + "ms"
+
+.subroutine _transparent label 194_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input swipe 50 250 250 250 500 "
+result = system_get DOS execution result (command)
+
+
+.subroutine _picture box 103_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+
+
+.subroutine _transparent label 196_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+.local variable heeee, text
+.local variable ffff, text
+
+heeee = to text (take mouse horizontal position () - 1073)
+ffff = to text (take mouse vertical position () - 520)
+command = "adb shell input tap " + heeee + " " + ffff
+result = system_get DOS execution result (command)
+
+
+.subroutine _transparent label 195_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input swipe 250 250 50 250 500"
+result = system_get DOS execution result (command)
+
+
+.subroutine _transparent label 193_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input swipe 250 50 250 250 500 "
+result = system_get DOS execution result (command)
+
+
+.subroutine _transparent label 192_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+command = "adb shell input swipe 250 250 250 10 500"
+result = system_get DOS execution result (command)
+
+
+.subroutine _transparent label 190_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 197_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 17
+
+.subroutine _transparent label 199_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 3
+
+.subroutine _transparent label 200_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+Command = Edit Box 13. Contents
+result = system_get DOS execution result (command)
+Edit Box 14. Content = Result
+
+.subroutine _transparent label 201_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+edit box 13. content = get clipboard text ()
+
+.subroutine _transparent label 202_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Set Clipboard Text (Edit Box 14. Content)
+load(success, , false)
+
+.subroutine _transparent label 203_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 16
+
+.subroutine _transparent label 204_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced Select Clip 1. Current Subfolder = 15
+
+.subroutine _transparent label 63_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variable result, text
+.local variable command, text
+
+' picture frame 38. picture = #picture4
+' Picture box 39.background color = picture box 44.background color
+
+' Picture box 42. Picture = #picture1
+' Picture frame 43. Background color = #silver white
+' picture frame
+40. Picture = #picture4
+' Picture box 41. Background color = Picture box 44. Background color
+
+' Advanced selection folder 1. Current subfolder = 19
+
+
+Open the specified URL (“https://wear.uotan.cn”)
+
+.subroutine _transparent label 211_ left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 7
+
+.subroutine _transparent label 212_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variables software, text
+.local variables software introduction, text
+.local variable introduction, text
+
+Software = "Wrist Drain"
+application = "https://include.xn--fiqs8s/sucai/" + software + "/"
+debug output (app)
+Software introduction = to text (HTTP read file (application + "/author.txt"))
+intro = to text (HTTP read file(application + "/intro.txt"))
+Advanced selection folder 1. Current subfolder = 18
+Label 26. Title = Software
+Label 27. Title = Software Introduction
+Label 28. Title = Introduction
+Picture box 137. Picture = HTTP read file (application + "/logo.png")
+Label 29. Basemap = HTTP read file (application + "/01.png")
+subrounding (label 29, to integer ("20"))
+Label 30. Basemap = HTTP read file (application + "/02.png")
+subrounding (label 30, to integer ("20"))
+Label 31. Basemap = HTTP read file (application + "/03.png")
+subrounding (label 31, to integer ("20"))
+Label 32. Basemap = HTTP read file (application + "/04.png")
+subrounding (label 32, to integer ("20"))
+
+
+.subroutine Sub rounding
+.parameters window, tab
+.parameter rounded corners, integer
+.local variable A, integer
+
+A = Dll rounded(0, 0, window.width, window.height, rounded, rounded)
+Dll set window area(window.getwindowhandle(), A, true)
+' This source code comes from the Easy Language Resource Network (www.eyuyan.la)
+Dll delete object (A)
+
+.subroutine _transparent label 214_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variables software, text
+.local variables software introduction, text
+.local variable introduction, text
+
+Software = "A Word on Your Wrist"
+application = "https://include.xn--fiqs8s/sucai/" + software + "/"
+debug output (app)
+Software introduction = to text (HTTP read file (application + "/author.txt"))
+intro = to text (HTTP read file(application + "/intro.txt"))
+Advanced selection folder 1. Current subfolder = 18
+Label 26. Title = Software
+Label 27. Title = Software Introduction
+Label 28. Title = Introduction
+Picture box 137. Picture = HTTP read file (application + "/logo.png")
+Label 29. Basemap = HTTP read file (application + "/01.png")
+subrounding (label 29, to integer ("20"))
+Label 30. Basemap = HTTP read file (application + "/02.png")
+subrounding (label 30, to integer ("20"))
+Label 31. Basemap = HTTP read file (application + "/03.png")
+subrounding (label 31, to integer ("20"))
+Label 32. Basemap = HTTP read file (application + "/04.png")
+subrounding (label 32, to integer ("20"))
+
+
+
+.subroutine _transparent label 215_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+.local variables software, text
+.local variables software introduction, text
+.local variable introduction, text
+
+software = "noise"
+application = "https://include.xn--fiqs8s/sucai/" + software + "/"
+debug output (app)
+Software introduction = to text (HTTP read file (application + "/author.txt"))
+intro = to text (HTTP read file(application + "/intro.txt"))
+Advanced selection folder 1. Current subfolder = 18
+Label 26. Title = Software
+Label 27. Title = Software Introduction
+Label 28. Title = Introduction
+Picture box 137. Picture = HTTP read file (application + "/logo.png")
+Label 29. Basemap = HTTP read file (application + "/01.png")
+subrounding (label 29, to integer ("20"))
+Label 30. Basemap = HTTP read file (application + "/02.png")
+subrounding (label 30, to integer ("20"))
+Label 31. Basemap = HTTP read file (application + "/03.png")
+subrounding (label 31, to integer ("20"))
+Label 32. Basemap = HTTP read file (application + "/04.png")
+subrounding (label 32, to integer ("20"))
+
+
+
+.subroutine _transparent label 210_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+Advanced selection folder 1. Current subfolder = 0
+
+
+.subroutine _picture box 42_ left mouse button pressed, logical type
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
+
+
+
+.subroutine _transparent label 152_left mouse button pressed, logical
+.parameter horizontal position, integer
+.parameter vertical position, integer
+.parameter function key state, integer
